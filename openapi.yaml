@@ -54,4 +54,4 @@ components:
       properties:
         titulo:
           type: string
-          example: "Minha primeira tarefa"
+          example: "Minha primeira tarefa" 
