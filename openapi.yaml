@@ -85,6 +85,17 @@ paths:
         "404":
           description: "Livro não encontrado"
           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+
+components:
+
+  schemas:
+
     Livro:
       type: object
       required:
@@ -105,17 +116,6 @@ paths:
           type: string
           example: "Iniciante"
 
-            application/json:
-              schema:
-                type: object
-                properties:
-                  erro:
-                    type: string
-
-components:
-
-  schemas:
-
     NovoLivro:
       type: object
 
@@ -135,4 +135,4 @@ components:
 
         nivel:
           type: string
-          example: "Iniciante"
+          example: "Iniciante"  
