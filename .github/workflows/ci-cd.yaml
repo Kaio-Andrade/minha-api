@@ -5,46 +5,65 @@ name: CI/CD — API de Livros
 on:
   push:
     branches: [main]
-  workflow_dispatch:   # permite rodar manualmente
+
+  workflow_dispatch:
 
 jobs:
 
-  # ─── JOB 1: Validar o contrato ───
+  # ───────── JOB 1: VALIDAR OPENAPI ─────────
   validar:
-    runs-on: ubuntu-latest   # VM Linux gratuita
+
+    runs-on: ubuntu-latest
 
     steps:
+
+      # Baixa o código do repositório
       - name: Baixar o código
         uses: actions/checkout@v4
 
+      # Instala Node.js
       - name: Instalar Node.js
         uses: actions/setup-node@v4
+
         with:
-          node-version: '20'
+          node-version: "20"
 
-      # Se o Spectral encontrar erros → pipeline PARA!
+      # Valida o contrato OpenAPI
       - name: Validar OpenAPI com Spectral
-        run: npx --yes @stoplight/spectral-cli@6 lint --ruleset "spectral:oas" openapi.yaml
 
-  # ─── JOB 2: Publicar documentação ───
-  # Só roda se o job "validar" passou!
+        run: |
+          npx --yes @stoplight/spectral-cli@6 lint \
+          --ruleset "spectral:oas" \
+          openapi.yaml
+
+  # ───────── JOB 2: PUBLICAR DOCUMENTAÇÃO ─────────
   publicar-docs:
+
     needs: validar
+
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
     steps:
+
+      # Baixa o código
       - name: Baixar código
         uses: actions/checkout@v4
 
+      # Gera documentação HTML
       - name: Gerar HTML com Redoc
+
         run: |
           mkdir -p docs
           npx --yes @redocly/cli build-docs openapi.yaml --output docs/index.html
 
+      # Publica no GitHub Pages
       - name: Publicar no GitHub Pages
+
         uses: peaceiris/actions-gh-pages@v3
+
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs

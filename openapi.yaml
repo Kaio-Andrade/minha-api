@@ -15,46 +15,64 @@ paths:
 
     get:
       summary: "Listar livros"
+
       operationId: "listBooks"
-      tags: ["Livros"]
+
+      tags:
+        - "Livros"
 
       responses:
+
         "200":
           description: "Lista de livros retornada com sucesso"
+
           content:
             application/json:
+
               schema:
                 type: array
+
                 items:
                   $ref: "#/components/schemas/Livro"
 
     post:
       summary: "Cadastrar livro"
+
       operationId: "createBook"
-      tags: ["Livros"]
+
+      tags:
+        - "Livros"
 
       requestBody:
+
         required: true
 
         content:
           application/json:
+
             schema:
               $ref: "#/components/schemas/NovoLivro"
 
       responses:
+
         "201":
           description: "Livro cadastrado com sucesso"
+
           content:
             application/json:
+
               schema:
                 $ref: "#/components/schemas/Livro"
 
         "400":
           description: "Dados inválidos"
+
           content:
             application/json:
+
               schema:
                 type: object
+
                 properties:
                   erro:
                     type: string
@@ -63,10 +81,14 @@ paths:
 
     get:
       summary: "Buscar livro por ID"
+
       operationId: "getBook"
-      tags: ["Livros"]
+
+      tags:
+        - "Livros"
 
       parameters:
+
         - name: id
           in: path
           required: true
@@ -75,19 +97,25 @@ paths:
             type: string
 
       responses:
+
         "200":
           description: "Livro encontrado com sucesso"
+
           content:
             application/json:
+
               schema:
                 $ref: "#/components/schemas/Livro"
 
         "404":
           description: "Livro não encontrado"
+
           content:
             application/json:
+
               schema:
                 type: object
+
                 properties:
                   erro:
                     type: string
@@ -97,26 +125,34 @@ components:
   schemas:
 
     Livro:
+
       type: object
+
       required:
         - id
         - titulo
         - autor
+
       properties:
+
         id:
           type: string
           example: "123"
+
         titulo:
           type: string
           example: "Python para Iniciantes"
+
         autor:
           type: string
           example: "João Silva"
+
         nivel:
           type: string
           example: "Iniciante"
 
     NovoLivro:
+
       type: object
 
       required:
@@ -135,4 +171,4 @@ components:
 
         nivel:
           type: string
-          example: "Iniciante"  
+          example: "Iniciante"
