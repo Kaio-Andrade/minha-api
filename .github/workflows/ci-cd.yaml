@@ -32,10 +32,9 @@ jobs:
       - name: Validar OpenAPI com Spectral
 
         run: |
-          npx --yes @stoplight/spectral-cli@6 lint \
-          --ruleset "spectral:oas" \
-          openapi.yaml
-
+           npx --yes @stoplight/spectral-cli@6 lint \
+           --ruleset "spectral:oas" \
+             openapi.yaml
   # ───────── JOB 2: PUBLICAR DOCUMENTAÇÃO ─────────
   publicar-docs:
 
