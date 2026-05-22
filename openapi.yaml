@@ -1,57 +1,90 @@
 openapi: "3.0.3"
+
 info:
-  title: "Minha API"
+  title: "API Livros de Programação"
   version: "1.0.0"
-  description: "Meu primeiro CI/CD"
+  description: "API para recomendar livros para iniciantes em programação"
+
 servers:
-  - url: "https://api.exemplo.com/v1"
-    description: "Produção"
+  - url: "https://api.livros.com/v1"
+    description: "Servidor principal"
+
 paths:
-  /tarefas:
+
+  /livros:
+
     get:
-      summary: "Listar tarefas"
-      operationId: "listTasks"
-      tags: ["Tarefas"]
+      summary: "Listar livros"
+      operationId: "listBooks"
+      tags: ["Livros"]
+
       responses:
         "200":
-          description: "Lista de tarefas"
+          description: "Lista de livros retornada com sucesso"
+
     post:
-      summary: "Criar tarefa"
-      operationId: "createTask"
-      tags: ["Tarefas"]
+      summary: "Cadastrar livro"
+      operationId: "createBook"
+      tags: ["Livros"]
+
       requestBody:
         required: true
+
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NovaTarefa"
+              $ref: "#/components/schemas/NovoLivro"
+
       responses:
         "201":
-          description: "Tarefa criada"
+          description: "Livro cadastrado"
+
         "400":
           description: "Dados inválidos"
-  /tarefas/{id}:
+
+  /livros/{id}:
+
     get:
-      summary: "Buscar tarefa"
-      operationId: "getTask"
-      tags: ["Tarefas"]
+      summary: "Buscar livro por ID"
+      operationId: "getBook"
+      tags: ["Livros"]
+
       parameters:
         - name: id
           in: path
           required: true
+
           schema:
             type: string
+
       responses:
         "200":
-          description: "Encontrada"
+          description: "Livro encontrado"
+
         "404":
-          description: "Não encontrada"
+          description: "Livro não encontrado"
+
 components:
+
   schemas:
-    NovaTarefa:
+
+    NovoLivro:
       type: object
-      required: [titulo]
+
+      required:
+        - titulo
+        - autor
+
       properties:
+
         titulo:
           type: string
-          example: "Minha primeira tarefa" 
+          example: "Python para Iniciantes"
+
+        autor:
+          type: string
+          example: "João Silva"
+
+        nivel:
+          type: string
+          example: "Iniciante"

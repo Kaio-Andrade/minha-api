@@ -1,5 +1,5 @@
 # Nome exibido na aba "Actions" do GitHub
-name: CI/CD — Minha API
+name: CI/CD — API de Livros
 
 # QUANDO executar: a cada push na main
 on:
