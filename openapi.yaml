@@ -21,6 +21,12 @@ paths:
       responses:
         "200":
           description: "Lista de livros retornada com sucesso"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Livro"
 
     post:
       summary: "Cadastrar livro"
@@ -37,10 +43,21 @@ paths:
 
       responses:
         "201":
-          description: "Livro cadastrado"
+          description: "Livro cadastrado com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Livro"
 
         "400":
           description: "Dados inválidos"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
 
   /livros/{id}:
 
@@ -59,10 +76,41 @@ paths:
 
       responses:
         "200":
-          description: "Livro encontrado"
+          description: "Livro encontrado com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Livro"
 
         "404":
           description: "Livro não encontrado"
+          content:
+    Livro:
+      type: object
+      required:
+        - id
+        - titulo
+        - autor
+      properties:
+        id:
+          type: string
+          example: "123"
+        titulo:
+          type: string
+          example: "Python para Iniciantes"
+        autor:
+          type: string
+          example: "João Silva"
+        nivel:
+          type: string
+          example: "Iniciante"
+
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
 
 components:
 
