@@ -135,4 +135,4 @@ components:
 
         nivel:
           type: string
-          example: "Iniciante"  
+          example: "Iniciante"
