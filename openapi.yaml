@@ -172,3 +172,13 @@ components:
         nivel:
           type: string
           example: "Iniciante" 
+# 1. Adicione um endpoint no openapi.yaml
+#    (por exemplo, DELETE /tarefas/{id})
+
+# 2. Salve o arquivo e execute:
+git add openapi.yaml
+git commit -m "feat: adicionar DELETE /tarefas/{id}"
+git push origin main
+
+# Em ~30 segundos:
+# ✅ https://kaio-andrade.github.io/minha-api atualizado!
